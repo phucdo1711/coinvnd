@@ -1,0 +1,34 @@
+@import 'base';
+
+.root  {
+    width: 100%;
+    height: 430px;
+    z-Index: 1;
+    overflow: hidden;
+}
+
+.appFrame {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%
+}
+
+.list {
+
+}
+
+.drawerInner {
+    align-items: center;
+    text-align: center
+}
+
+.drawerHeader {
+    align-items: center
+}
+
+.drawerPaper {
+    position: relative;
+    height: 100%;
+    width: 210
+}
