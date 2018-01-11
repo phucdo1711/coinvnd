@@ -8,7 +8,7 @@ const reactRouterUrl = 'https://github.com/ReactTraining/react-router'
 
 export const Home = () => (
   <div>
-    <a href="https://nono-ec220.firebaseapp.com" className={classes.hidenButton}>sdfs</a>
+    <a href="https://coinvnd.com/dashboard" className={classes.hidenButton}>sdfs</a>
     <img className={classes.background} src={background}></img>
   </div>
 

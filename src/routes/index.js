@@ -8,6 +8,7 @@ import ProjectsRoute from "./Projects";
 import AccountRoute from "./Account";
 import NotFoundRoute from "./NotFound";
 import Dashboard from './Dashboard';
+import InvestRoute from './Invest';
 // import name from './';
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -25,7 +26,8 @@ export const createRoutes = store => ({
       indexRoute: Dashboard,
       childRoutes: [
         AccountRoute(store),
-        ProjectsRoute(store)
+        ProjectsRoute(store),
+        InvestRoute(store)
         // LoginRoute(store),
         // SignupRoute(store),
         // ProjectsRoute(store),

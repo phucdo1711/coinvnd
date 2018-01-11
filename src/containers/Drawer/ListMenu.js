@@ -5,7 +5,7 @@ import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import { MenuList, MenuItem } from 'material-ui/Menu';
 
-import classes from './Drawer.scss';
+// import classes from './Drawer.scss';
 import DashBoard from 'material-ui-icons/Dashboard';
 import ShoppingCart from 'material-ui-icons/ShoppingCart'
 import color from 'styles/_colors.scss';
@@ -21,21 +21,12 @@ const list = [
     {
         name: 'Invest',
         icon: <ShoppingCart />,
-        link: '/projects'
+        link: '/invest'
     }
 ]
 
 const styles = theme => ({
-    menuItem: {
-        '&:focus': {
-            //backgroundColor: theme.palette.primary[500],
-            '& $text, & $icon': {
-                color: 'rgb(10, 63, 107)',
-            },
-        },
-    },
-    text: {color: 'rgb(10, 63, 107)'},
-    icon: {color: 'rgb(10, 63, 107)'},
+    color: {color: 'rgb(10, 63, 107)'},
 });
 
 export const ListMenu = ({ classes, activePath } ) => {
@@ -43,12 +34,12 @@ export const ListMenu = ({ classes, activePath } ) => {
         <div >
             <MenuList>
                 {list.map((item, index) => (
-                    <MenuItem className={classes.menuItem} component={Link} to={item.link} key={index}
+                    <MenuItem component={Link} to={item.link} key={index}
                     >
-                        <ListItemIcon className={activePath === item.link ? classes.icon : ""}>
+                        <ListItemIcon className={activePath === item.link ? classes.color : ""}>
                             {item.icon}
                         </ListItemIcon>
-                        <ListItemText primary={item.name}  classes={activePath === item.link ? { text: classes.text } : {}}/>
+                        <ListItemText primary={item.name}  classes={activePath === item.link ? { text: classes.color } : {}}/>
                     </MenuItem>
                 ))}
             </MenuList>
