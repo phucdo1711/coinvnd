@@ -3,36 +3,62 @@ import { withStyles } from 'material-ui/styles';
 import PropTypes from 'prop-types';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import InboxIcon from 'material-ui-icons/Inbox';
-import DraftsIcon from 'material-ui-icons/Drafts';
+import { MenuList, MenuItem } from 'material-ui/Menu';
+
 import classes from './Drawer.scss';
+import DashBoard from 'material-ui-icons/Dashboard';
+import ShoppingCart from 'material-ui-icons/ShoppingCart'
+import color from 'styles/_colors.scss';
+import {Link} from 'react-router';
+import Menu from 'material-ui/Menu/Menu';
 
-export const ListMenu = () => (
-    <div >
-        <List>
-            <ListItem button>
-                <ListItemIcon>
-                    <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Inbox" />
-            </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <DraftsIcon />
-                </ListItemIcon>
-                <ListItemText primary="Drafts" />
-            </ListItem>
-        </List>
-        <Divider />
-        <List>
-            <ListItem button>
-                <ListItemText primary="Trash" />
-            </ListItem>
-            <ListItem button component="a" href="#simple-list">
-                <ListItemText primary="Spam" />
-            </ListItem>
-        </List>
-    </div>
-)
+const list = [
+    {
+        name: 'DashBoard',
+        icon: <DashBoard />,
+        link: '/dashboard'
+    },
+    {
+        name: 'Invest',
+        icon: <ShoppingCart />,
+        link: '/projects'
+    }
+]
 
-export default ListMenu;
+const styles = theme => ({
+    menuItem: {
+        '&:focus': {
+            //backgroundColor: theme.palette.primary[500],
+            '& $text, & $icon': {
+                color: 'rgb(10, 63, 107)',
+            },
+        },
+    },
+    text: {color: 'rgb(10, 63, 107)'},
+    icon: {color: 'rgb(10, 63, 107)'},
+});
+
+export const ListMenu = ({ classes, activePath } ) => {
+    return (
+        <div >
+            <MenuList>
+                {list.map((item, index) => (
+                    <MenuItem className={classes.menuItem} component={Link} to={item.link} key={index}
+                    >
+                        <ListItemIcon className={activePath === item.link ? classes.icon : ""}>
+                            {item.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={item.name}  classes={activePath === item.link ? { text: classes.text } : {}}/>
+                    </MenuItem>
+                ))}
+            </MenuList>
+        </div>
+    )
+}
+
+ListMenu.propTypes = {
+    classes: PropTypes.object.isRequired,
+    activePath: PropTypes.string.isRequired
+};
+
+export default withStyles(styles)(ListMenu);

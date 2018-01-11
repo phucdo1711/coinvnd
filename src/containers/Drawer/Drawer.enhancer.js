@@ -7,16 +7,19 @@ import {
     withStateHandlers,
     withPropsOnChange,
     lifecycle,
+    withState,
+    withContext
 } from 'recompose'
 import { ACCOUNT_PATH } from 'constants'
 import { withRouter, spinnerWhileLoading } from 'utils/components'
-import { getVal,firestoreConnect } from 'react-redux-firebase';
+import { getVal, firestoreConnect } from 'react-redux-firebase';
+import PropTypes from "prop-types";
 
 export default compose(
-    firestoreConnect(() => 
+    firestoreConnect(() =>
         [
             {
-               collection: 'Account',
+                collection: 'Account',
                 doc: 'm7hkRX2j2j53S06bIECw'
             }
         ]
@@ -24,21 +27,15 @@ export default compose(
     connect((state) => ({
         account: state.firestore.data.Account,
     })),
-    //withRouter,
+   
     withStateHandlers(
         ({ isMenuOpenInitially = false }) => ({
-            isMenuOpen: isMenuOpenInitially
+            isMenuOpen: isMenuOpenInitially,
         }),
         {
-           handleDrawerToggle: ({isMenuOpen}) => () => ({
-               isMenuOpen: !isMenuOpen
-               
-           })
+            handleDrawerToggle: ({ isMenuOpen }) => () => ({
+                isMenuOpen: !isMenuOpen
+            }),
         }
     ),
-    lifecycle({
-        componentDidMount(){
-           // this.props.firestore.unsetListener({collection: 'Account', doc: 'm7hkRX2j2j53S06bIECw'});
-        }
-    })
 )

@@ -1,50 +1,65 @@
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import List from 'material-ui/List';
-import Typography from 'material-ui/Typography';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
-import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
-import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 import classes from "./Drawer.scss";
 import ListMenu from './ListMenu';
 import classNames from 'classnames';
+import AccountCircle from 'material-ui-icons/AccountCircle'
+import { withStyles } from 'material-ui/styles';
+import Avatar from 'material-ui/Avatar';
+import PropTypes from 'prop-types';
+import Typography from 'material-ui/Typography';
 
 export const NavDrawer = ({
-    account,
     isMenuOpen,
-    handleDrawerToggle
+    handleDrawerToggle,
+    location,
   }) => {
-    console.log("account: ",JSON.stringify(account))
-      return (
+    return (
         <Drawer
             type="permanent"
             classes={{
-                paper: classes.drawerPaper,
+                paper: classNames(classes.drawerPaper, !isMenuOpen && classes.drawerPaperClose),
             }}
             open={isMenuOpen}
         >
-        {/* {console.log(JSON.stringify(account))} */}
             <div className={classes.drawerInner}>
                 <div className={classes.drawerHeader}>
+                    <div style={{ display: 'inline-block' }}>
+                        <Avatar
+                            className={!isMenuOpen ? classes.avatar : classes.avatarLarge}
+                            src="https://jobseekers.vn/wp-content/themes/sb_theme/assets/images/default_avatar.png" />
+                        {/* <AccountCircle />
+                        </Avatar> */}
+                    </div>
+                    <Typography type="title" gutterBottom hidden={isMenuOpen} >
+                        {isMenuOpen && 'Phuc Do'}
+                    </Typography>
+                </div>
+                <Divider />
+                <ListMenu
+                    activePath={location.pathname}
+                />
+                <div className={classes.drawerFooter}>
                     <IconButton
                         color="contrast"
                         aria-label="open drawer"
                         onClick={handleDrawerToggle}
-
                     >
                         <MenuIcon
                             nativeColor='black'
                         />
                     </IconButton>
                 </div>
-                <Divider />
-                <ListMenu />
             </div>
         </Drawer>
-    )};
+    )
+};
 
-export default NavDrawer;
+NavDrawer.propTypes = {
+    isMenuOpen: PropTypes.bool.isRequired,
+    handleDrawerToggle: PropTypes.func.isRequired,
+}
+export default withStyles(classes)(NavDrawer);
